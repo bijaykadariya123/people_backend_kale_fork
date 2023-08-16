@@ -116,7 +116,6 @@ app.post("/people", authCheck, async (req, res) => {
   try {
     // create the new person
     const person = await People.create(req.body);
-
     // add the username to the person
     person.username = req.payload.username;
     // send newly created person as JSON
@@ -125,7 +124,6 @@ app.post("/people", authCheck, async (req, res) => {
     res.status(400).json({ error });
   }
 });
-
 // SHOW - GET - /people/:id - get a single person
 app.get("/people/:id", authCheck, async (req, res) => {
   try {
@@ -154,15 +152,15 @@ app.put("/people/:id", authCheck, async (req, res) => {
 
 // DESTROY - DELETE - /people/:id - delete a single person
 app.delete("/people/:id", authCheck, async (req, res) => {
-    try {
-        // delete the person
-        const person = await People.findByIdAndDelete(req.params.id)
-        // send deleted person as json
-        res.status(204).json(person)
-    } catch(error){
-        res.status(400).json({error})
-    }
-})
+  try {
+    // delete the person
+    const person = await People.findByIdAndDelete(req.params.id);
+    // send deleted person as json
+    res.status(204).json(person);
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
 
 // create a test route
 app.get("/", (req, res) => {
